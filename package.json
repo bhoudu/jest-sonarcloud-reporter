@@ -61,6 +61,7 @@
     "yarn-audit-html": "^3.0.0"
   },
   "jestSonar": {
+    "withRelativePaths": true,
     "reportPath": "reports",
     "reportFile": "test-report.xml"
   }
