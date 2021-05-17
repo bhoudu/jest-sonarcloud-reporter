@@ -21,6 +21,7 @@ jobs:
         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
     - run: yarn install --frozen-lockfile
     - run: yarn build
+    - run: mkdir -p reports
     - run: yarn verify
     - name: Archive build reports
       uses: actions/upload-artifact@v2
