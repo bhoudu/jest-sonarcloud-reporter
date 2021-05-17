@@ -38,7 +38,7 @@ function file(
   withRelativePaths: boolean,
   testResult: any,
 ) {
-  const path = withRelativePaths ? testResult.testFilePath.substring(root.length) : testResult.testFilePath;
+  const path = withRelativePaths ? '.' + testResult.testFilePath.substring(root.length) : testResult.testFilePath;
   const aFile = [{ _attr: { path } }];
   const testCases = testResult.testResults.map(testCase);
   return {
