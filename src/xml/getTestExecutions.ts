@@ -22,7 +22,6 @@ function testCase(testResult) {
       duration: testResult.duration || 0,
     },
   };
-
   if (testResult.status === 'failed') {
     failures = testResult.failureMessages.map(failure);
     return { testCase: [aTestCase].concat(failures) };
@@ -31,7 +30,11 @@ function testCase(testResult) {
   }
 }
 
-function file(testResult) {
+function file(
+  root: string,
+  withRelativePaths: boolean,
+  testResult: any,
+) {
   const aFile = [{ _attr: { path: testResult.testFilePath } }];
   const testCases = testResult.testResults.map(testCase);
   return {
@@ -39,9 +42,16 @@ function file(testResult) {
   };
 }
 
-export function getTestExecutions(data, formatForSonar56: boolean) {
+export function getTestExecutions(
+  root: string,
+  data: any,
+  formatForSonar56: boolean,
+  withRelativePaths: boolean,
+): object {
   const aTestExecution = [{ _attr: { version: '1' } }];
-  const testResults = data.testResults.map(file);
+  const testResults = data.testResults.map(r => {
+    return file(root, withRelativePaths, r);
+  });
   return formatForSonar56
     ? { unitTest: aTestExecution.concat(testResults) }
     : { testExecutions: aTestExecution.concat(testResults) };

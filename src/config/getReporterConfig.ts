@@ -14,6 +14,7 @@ export interface ReporterConfig {
   reportPath: string;
   reportFile: string;
   sonar56x: boolean;
+  withRelativePaths: boolean;
 }
 
 export function getReporterConfig(
@@ -34,6 +35,7 @@ export function getReporterConfig(
     reportPath: root,
     reportFile: 'test-report.xml',
     sonar56x: false,
+    withRelativePaths: false,
     ...allEnvConfig,
     ...envConfig[env]
   };

@@ -16,7 +16,7 @@ function xmlIndent(indent: number): string {
 }
 
 export default (results) => {
-  const testExecutions = getTestExecutions(results, config.sonar56x);
+  const testExecutions = getTestExecutions(root, results, config.sonar56x, config.withRelativePaths);
   const report = xml(testExecutions, { declaration: true, indent: xmlIndent(config.indent) });
   if (!fs.existsSync(config.reportPath)) {
     fs.mkdirSync(config.reportPath);
