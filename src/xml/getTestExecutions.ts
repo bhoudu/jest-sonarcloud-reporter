@@ -14,7 +14,10 @@ function failure(message) {
   };
 }
 
-function testCase(testResult) {
+function testCase(
+  root: string,
+  testResult: any,
+): any {
   let failures;
   const aTestCase = {
     _attr: {
@@ -35,7 +38,8 @@ function file(
   withRelativePaths: boolean,
   testResult: any,
 ) {
-  const aFile = [{ _attr: { path: testResult.testFilePath } }];
+  const path = withRelativePaths ? testResult.testFilePath.substring(root.length) : testResult.testFilePath;
+  const aFile = [{ _attr: { path } }];
   const testCases = testResult.testResults.map(testCase);
   return {
     file: aFile.concat(testCases),
